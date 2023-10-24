@@ -6,5 +6,10 @@
 
 {% block body %}
     {{ entry|safe }}
-    <a href="{% url 'index'%}">Back home</a>
+    <div>
+        <a href="{% url 'edit' %}?title={{ title }}" > Edit content </a>  
+    </div>
+    <div>
+        <a href="{% url 'index'%}">Back home</a>
+    </div>
 {% endblock %}
