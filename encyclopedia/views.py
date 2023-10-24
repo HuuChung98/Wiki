@@ -41,3 +41,28 @@ def search(request):
         return render(request, "encyclopedia/search.html", {
             "search": search_value
     })
+
+def createNewPage(request):
+    # return render(request, "encyclopedia/newpage.html")
+    entryNew = ''
+    if request.method == "POST":
+        # get the title
+        title = request.POST['title']
+        # get the text 
+        markdown = request.POST['markdown']
+        print("Title" + title)
+        print("Markdown content" + markdown)
+
+        name_list = util.list_entries()
+
+        if title in name_list:
+        # When the page is saved, if an encyclopedia entry already  exists with the provided title, the user should be presented with an error message.
+            return render(request, "encyclopedia/errormessage.html", {
+                    "title": title
+                })
+                # Save the new entry
+        util.save_entry(title, markdown)
+
+        return render(request, "encyclopedia/content.html", {"entry": markdown2.markdown(markdown)})
+
+    return render(request, "encyclopedia/newpage.html")

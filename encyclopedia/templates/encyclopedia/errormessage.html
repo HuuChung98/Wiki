@@ -1,0 +1,10 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Error
+{% endblock %}
+
+{% block body %}
+    <h1> {{ title }} Exited </h1>
+    <a href="{% url 'createNewPage' %}">Back to Create new page</a>
+{% endblock %}
