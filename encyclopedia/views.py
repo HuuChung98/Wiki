@@ -1,4 +1,5 @@
 import markdown2
+import random
 # from bs4 import BeautifulSoup
 from django import forms
 from django.shortcuts import render
@@ -105,4 +106,18 @@ def edit(request):
     return render(request, "encyclopedia/editContent.html", {
         "title": title,
         "entry": entry
+    })
+
+def randomPage(request):
+    random_title = util.list_entries()
+
+    random_encyclopedia = random.choice(random_title)
+    # content(request, random_encyclopedia)
+    entry = util.get_entry(random_encyclopedia)
+    if entry:
+        entry = markdown2.markdown(entry)
+
+    return render(request, "encyclopedia/random.html", {
+        "title": random_encyclopedia,
+        "entry": entry,
     })
